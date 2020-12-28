@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Parallax vertical</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/shadow.css">
+
+
+    <style>
+        #div1 {
+            background-image: url("assets/road.png");
+        }
+
+        #div2 {
+            background-image: url("assets/road.png");
+        }
+        
+        #div3 {
+            background-image: url("assets/road.png");
+        }
+        #div4 {
+            background-image: url("assets/road.png");
+        }
+                
+        #div1, #div2, #div3, #div4{
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+    <div class="container-fluid" style="background-color:gray;height:100vh;">
+        <h1 style="color: white; font-size: 600%; text-align: center">國道逼車驚魂</h1>
+    </div>
+    <div id="div1" class="container-fluid innershadow1" style="background-color:black;height:200vh;position:relative;">
+        <img class="scrollable dropshadow1" data-width=16 data-width2=20 data-top=15 data-top2=75 data-left=30 data-left2=70 src="assets/bus.png" style="position:absolute;width:16%;top:15%;left:30%;">
+        <img class="scrollable dropshadow1" data-top=35 data-top2=85 data-left=10 data-left2=40 src="assets/car.png" style="position:absolute;width:20%;top:35%;left:50%;">
+
+    </div>
+    <div class="container-fluid" style="background-color:rgba(0,0,0,0.5);min-height: 1800px">
+        <h1 style="color: wheat; text-align: center">大客車轉換至外車道時，疑似引起後方自小客車不滿。</h1>
+    </div>
+    <div id="div2" class="container-fluid innershadow1" style="background-color:black;height:200vh;position:relative;">
+        <img class="scrollable dropshadow1" data-top=28 data-top2=78 data-left=20 data-left2=70 src="assets/bus.png" style="position:absolute;width:20%;top:28%;left:20%;">
+        <img class="scrollable dropshadow1" data-top=20 data-top2=70 data-left=5 data-left2=71 src="assets/car.png" style="position:absolute;width:20%;top:20%;left:5%;">
+    </div>
+
+
+    <div class="container-fluid" style="background-color:darkgrey;min-height: 1800px">
+        <h1 style="color: wheat; text-align: center">自小客車衝上前到大客車駕駛座旁叫囂。</h1>
+    </div>
+
+    <div id="div3" class="container-fluid innershadow1" style="background-color:black;height:200vh;position:relative;">
+        <img class="scrollable dropshadow1" data-top=28 data-top2=78 data-left=10 data-left2=30 src="assets/bus.png" style="position:absolute;width:20%;top:28%;left:10%;">
+        <img class="scrollable dropshadow1" data-top=20 data-top2=85 data-left=20 data-left2=55 src="assets/car.png" style="position:absolute;width:20%;top:20%;left:20%;">
+    </div>
+
+
+    <div class="container-fluid" style="background-color:darkgrey;min-height: 1800px">
+    <h1 style="color: wheat; text-align: center">隨後自小客車超車至大客車前方並緊急煞車。</h1>
+    </div>
+    
+    
+    <script>
+        $(document).ready(function() {
+            var winh = $(window).height();
+            $(window).scroll(function() {
+                var scrolled = $(window).scrollTop();
+                $(".scrollable").each(function() {
+                    var parent_pos = $(this).parent().offset().top;
+                    var next_pos = $(this).parent().next().offset().top;
+                    var parent_height = $(this).parent().height();
+                    var parent_scrolled = scrolled - $(this).parent().offset().top;
+                    if (parent_scrolled > 0 && scrolled < next_pos - winh) {
+
+                        if ($(this).attr("data-left")) {
+                            $(this).css('left', (($(this).data('left2') - $(this).data('left')) * parent_scrolled / winh + $(this).data('left')) + '%');
+                        }
+                        if ($(this).attr("data-top")) {
+                            $(this).css('top', (($(this).data('top2') - $(this).data('top')) * parent_scrolled / winh + $(this).data('top')) + '%');
+                        }
+                        if ($(this).attr("data-width")) {
+                            $(this).css('width', (($(this).data('width2') - $(this).data('width')) * parent_scrolled / winh + $(this).data('width')) + '%');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
